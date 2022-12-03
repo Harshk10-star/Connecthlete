@@ -3,6 +3,7 @@ package com.example.connecthlete;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -25,14 +26,19 @@ public class Results extends AppCompatActivity {
         ArrayList<String> list=new ArrayList<>();
         ArrayAdapter adapter=new ArrayAdapter<String>(this,R.layout.list_item,list);
         listView.setAdapter(adapter);
-
+        Intent intent=getIntent();
+        String user=intent.getStringExtra("current");
+        String sport=intent.getStringExtra("sport");
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Player");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    list.add(dataSnapshot.getValue().toString());
+                    String p=dataSnapshot.getKey();
+                    if(!p.equals(user) && dataSnapshot.child("sport").getValue().toString().equals(sport)){
+                        list.add("User: "+p+" wants to play "+sport+"!");
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }

@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         login=findViewById(R.id.signin);
         signUp=findViewById(R.id.signup);
-        password=findViewById(R.id.phone);
-        phoneNumber=findViewById(R.id.pass);
+        password=findViewById(R.id.pass);
+        phoneNumber=findViewById(R.id.phone);
 
         FirebaseDatabase database=FirebaseDatabase.getInstance();
         DatabaseReference tablePlayer=database.getReference("Player");

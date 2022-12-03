@@ -37,6 +37,7 @@ public class FindPeople extends Activity implements AdapterView.OnItemSelectedLi
                 databaseReference.child(user).child("sport").setValue(item); //cahngeing sports assingment
                Intent intents=new Intent(FindPeople.this,Results.class);
                intents.putExtra("current",user);
+               intents.putExtra("sport",item);
                startActivity(intents);
                finish();
             }
