@@ -40,6 +40,15 @@
 
             </EditText>
 
+            <EditText
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/uni"
+                android:hint="University"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </EditText>
 
         </LinearLayout>
 

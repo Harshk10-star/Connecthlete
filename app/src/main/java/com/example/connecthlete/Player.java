@@ -4,13 +4,14 @@ public class Player {
 
     private String password;
     private String sport;
-
+    private String uni;
     public Player() {}
-    public Player(String password, String sport) {
+    public Player(String password, String sport,String uni) {
 
 
         this.password = password;
         this.sport = sport;
+        this.uni=uni;
 
     }
     public String getPassword(){

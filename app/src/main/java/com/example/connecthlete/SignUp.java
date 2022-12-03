@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 public class SignUp extends AppCompatActivity {
     EditText phoneNumber;
     EditText password;
+    EditText unis;
     Button signUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class SignUp extends AppCompatActivity {
         signUp=findViewById(R.id.si);
         phoneNumber=findViewById(R.id.phoneN);
         password=findViewById(R.id.pwdid);
-
+        unis= findViewById(R.id.uni);
         FirebaseDatabase database=FirebaseDatabase.getInstance();
         DatabaseReference tablePlayer=database.getReference("Player");
 
@@ -42,7 +43,7 @@ public class SignUp extends AppCompatActivity {
                         if(snapshot.child(phoneNumber.getText().toString()).exists()){
                             Toast.makeText(SignUp.this, "Already Exists", Toast.LENGTH_SHORT).show();
                         }else{
-                            Player player=new Player(password.getText().toString(),"");
+                            Player player=new Player(password.getText().toString(),"",unis.getText().toString());
                             tablePlayer.child(phoneNumber.getText().toString()).setValue(player);
                             Toast.makeText(SignUp.this, "Sign Up Succesfull", Toast.LENGTH_SHORT).show();
                             Intent intent= new Intent(SignUp.this,MainActivity.class);

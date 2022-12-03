@@ -29,15 +29,23 @@ public class Results extends AppCompatActivity {
         Intent intent=getIntent();
         String user=intent.getStringExtra("current");
         String sport=intent.getStringExtra("sport");
+
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Player");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
+                String uni="";
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    String get= dataSnapshot.getKey();
+                    if(get.equals(user)){
+                        uni=dataSnapshot.child("uni").getValue().toString();
+                    }
+                }
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     String p=dataSnapshot.getKey();
-                    if(!p.equals(user) && dataSnapshot.child("sport").getValue().toString().equals(sport)){
-                        list.add("User: "+p+" wants to play "+sport+"!");
+                    if(!p.equals(user) && dataSnapshot.child("sport").getValue().toString().equals(sport) && dataSnapshot.child("uni").getValue().toString().equals(uni)){
+                        list.add("User: "+p+" wants to play "+sport+"at"+uni+"!");
                     }
                 }
                 adapter.notifyDataSetChanged();
